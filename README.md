@@ -1,16 +1,16 @@
-# api_gallery_app
+# LoremPicsum Api Gallery Flutter Mobile App
 
-A new Flutter application.
+In this project, I used API to get data from Lorem Picsum's image list URL.
 
-## Getting Started
+![](https://media.giphy.com/media/RhgKxFUOF7PS5lsnEC/giphy.gif)
 
-This project is a starting point for a Flutter application.
+I design an AlertDialog to show a specific image with its data that came from API. In this AlertDialog we can rotate the image in x and y dimensions with help of the Transform widget. We can go to the official site of the image by clicking the visit link.
 
-A few resources to get you started if this is your first Flutter project:
+![](https://media.giphy.com/media/5v0oGdeJvZ9cHkLGJR/giphy.gif)
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+![](https://media.giphy.com/media/YIMV3VAxgHYYpLrFRz/giphy.gif)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# Packages 
+
+https://pub.dev/packages/http for API
+https://pub.dev/packages/url_launcher for launching url in browser
