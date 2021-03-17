@@ -39,13 +39,11 @@ class _PageState extends State<Page> {
   Future<List<Album>> _fetchData() async {
     return http.get('https://picsum.photos/v2/list') .then((value) {
       if(value.statusCode == 200){
-        print('girdi 200');
         final jsonData = json.decode(value.body);
         final album = <Album>[];
         for(var i in jsonData){
           album.add(Album.fromJson(i));
         }
-        print('for bitti');
         return album;
       }else{
         return null;
@@ -66,8 +64,6 @@ class _PageState extends State<Page> {
       isloading = true;
     });
     album = await _fetchData();
-    print('girdi async');
-    print(album[1].author);
     setState(() {
       isloading = false;
     });
