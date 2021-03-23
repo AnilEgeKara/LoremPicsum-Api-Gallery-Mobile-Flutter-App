@@ -3,20 +3,13 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
+import 'package:api_gallery_app/imageScreen.dart';
 
 Offset _offset = Offset(0.2, 0.6);
-
+bool status = true;
 void main() => runApp(MyApp());
 
-class MyApp extends StatefulWidget {
-  MyApp({Key key}) : super(key: key);
-
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -24,7 +17,11 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Page()
+      initialRoute: '/home',
+      routes: {
+        '/home': (context) => Page(),
+        '/imageScreen': (context) => ImageSrceen(),
+      },
     );
   }
 }
@@ -73,6 +70,15 @@ class _PageState extends State<Page> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: Switch(
+          activeColor: Colors.pinkAccent,
+          value: status,
+          onChanged: (value) {
+            setState(() {
+              status = value;
+            });
+          },
+        ),
         centerTitle: true,
         title: Text('Lorem Picsum Gallery ',style: TextStyle(color: Colors.black),),
         backgroundColor: Colors.white,
@@ -88,12 +94,25 @@ class _PageState extends State<Page> {
             itemBuilder: (BuildContext ctx, index) {
               return InkWell(
                 onTap: (){
-                  showDialog(context: context, child:
-                  MyDialog(author:album[index].author,width:album[index].width,height:album[index].height,download_url:album[index].download_url,url: album[index].url,)
-                  );
-                  setState(() {
-                    _offset = Offset(0.2, 0.6);
-                  });
+                  if(status==true)
+                      {
+                          showDialog(
+                              context: context,
+                              child: MyDialog(
+                                author: album[index].author,
+                                width: album[index].width,
+                                height: album[index].height,
+                                download_url: album[index].download_url,
+                                url: album[index].url,
+                              )
+                          );
+                          setState(() {
+                            _offset = Offset(0.2, 0.6);
+                          });
+                      }else{
+                          Navigator.pushNamed(context, '/imageScreen',arguments: {'author':album[index].author,'width': album[index].width,'height': album[index].height,'download_url':album[index].download_url,'url': album[index].url});
+                      }
+
                 },
                 child: Card(
                   semanticContainer: true,
